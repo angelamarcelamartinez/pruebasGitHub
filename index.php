@@ -10,6 +10,7 @@ if ($pdo === null) {
 }
 
 $tipos = obtenerTodosLosTipos($pdo);
+$marcas=obtenerTodasLasMarcas($pdo);
 
 $accion = $_GET['accion'] ?? 'menu';
 $mensaje = '';
@@ -633,13 +634,29 @@ if (
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Marca:</label>
 
-                                <input
-                                    type="text"
-                                    name="device_brand"
-                                    required
-                                    class="form-control">
+                                <label class="form-label">
+                                    Marca del dispositivo:
+                                </label>
+
+                                <select name="brand_id" class="form-control">
+
+                                    <option value="">
+                                        Sin Marca
+                                    </option>
+
+                                    <?php foreach ($marcas as $m): ?>
+
+                                        <option value="<?= $m['brand_id'] ?>">
+
+                                            <?= htmlspecialchars($m['brand_name']) ?>
+
+                                        </option>
+
+                                    <?php endforeach; ?>
+
+                                </select>
+
                             </div>
 
                             <div class="mb-3">
